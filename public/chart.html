@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard du Restaurant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/lucide-static@0.321.0/font/lucide.min.css" rel="stylesheet">
+    <style>
+       .image{
+        margin-left: -50px;
+        margin-top: -50px;
+            width:200px;
+            height: 150px ;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex h-screen overflow-hidden">
+    <div class="w-64 h-screen bg-gray-900 text-white flex flex-col">
+        <!-- Header -->
+        <div class="p-4 flex items-center space-x-2">
+            <img class="image" src="/logo.png" alt="">
+        </div>
+
+        <!-- Navigation -->
+        <nav class="flex-grow p-4">
+            <ul class="space-y-2">
+                <li>
+                    <a href="#" class="flex items-center space-x-3 p-2 rounded bg-blue-600 text-white hover:bg-blue-700">
+                        <i class="lucide-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/public/menus.html" class="flex items-center space-x-3 p-2 rounded text-gray-300 hover:bg-gray-800 hover:text-white">
+                        <i class="lucide-layout-dashboard"></i>
+                        <span>Menus</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/commandes.html" class="flex items-center space-x-3 p-2 rounded text-gray-300 hover:bg-gray-800 hover:text-white">
+                        <i class="lucide-shopping-cart"></i>
+                        <span>Orders</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/public/plats.html" class="flex items-center space-x-3 p-2 rounded text-gray-300 hover:bg-gray-800 hover:text-white">
+                        <i class="lucide-package"></i>
+                        <span>Plats</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/clients.html" class="flex items-center space-x-3 p-2 rounded text-gray-300 hover:bg-gray-800 hover:text-white">
+                        <i class="lucide-users"></i>
+                        <span>Customers</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+       
+    </div>
+
+    <div class="flex-1 p-4 overflow-auto">
+        <h1 class="text-2xl font-bold text-center text-gray-800 mb-4">Dashboard du Restaurant</h1>
+        <div class="grid grid-cols-2 gap-4">
+            <div class="bg-white p-2 rounded-lg shadow-md">
+                <canvas id="menuPriceChart"></canvas>
+            </div>
+            <div class="bg-white p-2 rounded-lg shadow-md">
+                <canvas id="platCategorieChart"></canvas>
+            </div>
+            <div class="bg-white p-2 rounded-lg shadow-md">
+                <canvas id="commandeStatusChart"></canvas>
+            </div>
+            <div class="bg-white p-2 rounded-lg shadow-md">
+                <canvas id="platDisponibiliteChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fonction pour charger les données JSON
+        async function loadData(url) {
+            const response = await fetch(url);
+            return await response.json();
+        }
+
+        // Fonction pour créer les graphiques
+        async function createCharts() {
+            const menus = await loadData('menus.json');
+            const plats = await loadData('plats.json');
+            const commandes = await loadData('commandes.json');
+
+            const chartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 12,
+                            font: {
+                                size: 10
+                            }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        font: {
+                            size: 14
+                        }
+                    }
+                }
+            };
+
+            // Graphique des prix des menus
+            const menuPriceCtx = document.getElementById('menuPriceChart').getContext('2d');
+            new Chart(menuPriceCtx, {
+                type: 'bar',
+                data: {
+                    labels: menus.map(menu => menu.nom),
+                    datasets: [{
+                        label: 'Prix des menus',
+                        data: menus.map(menu => menu.prix),
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    ...chartOptions,
+                    plugins: {
+                        ...chartOptions.plugins,
+                        title: {
+                            ...chartOptions.plugins.title,
+                            text: 'Prix des menus'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Prix (€)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Graphique des catégories de plats
+            const platCategories = plats.reduce((acc, plat) => {
+                acc[plat.categorie] = (acc[plat.categorie] || 0) + 1;
+                return acc;
+            }, {});
+
+            const platCategorieCtx = document.getElementById('platCategorieChart').getContext('2d');
+            new Chart(platCategorieCtx, {
+                type: 'pie',
+                data: {
+                    labels: Object.keys(platCategories),
+                    datasets: [{
+                        data: Object.values(platCategories),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 206, 86, 0.6)',
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(153, 102, 255, 0.6)'
+                        ]
+                    }]
+                },
+                options: {
+                    ...chartOptions,
+                    plugins: {
+                        ...chartOptions.plugins,
+                        title: {
+                            ...chartOptions.plugins.title,
+                            text: 'Répartition des catégories de plats'
+                        }
+                    }
+                }
+            });
+
+            // Graphique des statuts de commandes
+            const commandeStatuses = commandes.reduce((acc, commande) => {
+                acc[commande.status] = (acc[commande.status] || 0) + 1;
+                return acc;
+            }, {});
+
+            const commandeStatusCtx = document.getElementById('commandeStatusChart').getContext('2d');
+            new Chart(commandeStatusCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(commandeStatuses),
+                    datasets: [{
+                        data: Object.values(commandeStatuses),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 206, 86, 0.6)'
+                        ]
+                    }]
+                },
+                options: {
+                    ...chartOptions,
+                    plugins: {
+                        ...chartOptions.plugins,
+                        title: {
+                            ...chartOptions.plugins.title,
+                            text: 'Statuts des commandes'
+                        }
+                    }
+                }
+            });
+
+            // Graphique de disponibilité des plats
+            const platDisponibilite = plats.reduce((acc, plat) => {
+                acc[plat.disponibilite ? 'Disponible' : 'Non disponible']++;
+                return acc;
+            }, { 'Disponible': 0, 'Non disponible': 0 });
+
+            const platDisponibiliteCtx = document.getElementById('platDisponibiliteChart').getContext('2d');
+            new Chart(platDisponibiliteCtx, {
+                type: 'pie',
+                data: {
+                    labels: Object.keys(platDisponibilite),
+                    datasets: [{
+                        data: Object.values(platDisponibilite),
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(255, 99, 132, 0.6)'
+                        ]
+                    }]
+                },
+                options: {
+                    ...chartOptions,
+                    plugins: {
+                        ...chartOptions.plugins,
+                        title: {
+                            ...chartOptions.plugins.title,
+                            text: 'Disponibilité des plats'
+                        }
+                    }
+                }
+            });
+        }
+
+        // Appeler la fonction pour créer les graphiques
+        createCharts();
+    </script>
+</body>
+</html>
