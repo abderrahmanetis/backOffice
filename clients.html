@@ -1,0 +1,35 @@
+<!-- clients.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Clients</title>
+    <link rel="stylesheet" href="clients.css">
+    
+</head>
+<body>
+    <div class="container">
+        <h2>Gestion des Clients</h2>
+        <form id="form-client"a>
+            <input type="text" id="client-nom" placeholder="Nom" required>
+            <input type="email" id="client-email" placeholder="Email" required>
+            <input type="tel" id="client-telephone" placeholder="Téléphone" required>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </form>
+        <table id="table-clients" class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Téléphone</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <script src="clients.js"></script>
+</body>
+</html>

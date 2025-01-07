@@ -1,0 +1,30 @@
+[
+  {
+    "nom": "Salade",
+    "prix": 8,
+    "plats": [
+      1
+    ],
+    "id": 1
+  },
+  {
+    "nom": "Pizza",
+    "prix": 6,
+    "plats": [
+      1,
+      2,
+      3
+    ],
+    "id": 2
+  },
+  {
+    "nom": "Pattes",
+    "prix": 5,
+    "plats": [
+      1,
+      2,
+      3
+    ],
+    "id": 3
+  }
+]

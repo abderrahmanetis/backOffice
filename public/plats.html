@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Plats</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gestion des Plats</h1>
+    
+        <!-- Tableau des plats -->
+        <table id="table-plats">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Prix (€)</th>
+                    <th>Catégorie</th>
+                    <th>Disponibilité</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Les lignes des plats seront ajoutées ici par JavaScript -->
+            </tbody>
+        </table>
+    
+        <!-- Formulaire d'ajout de plat -->
+        <form onsubmit="ajouterPlat(); return false;">
+            <input type="text" id="nom" placeholder="Nom du plat" required>
+            <input type="number" id="prix" placeholder="Prix" step="0.01" required>
+            <input type="text" id="categorie" placeholder="Catégorie" required>
+            <label>
+                <input type="checkbox" id="disponibilite"> Disponible
+            </label>
+            <button type="submit">Ajouter le plat</button>
+        </form>
+    </div>
+    
+    <!-- Add this line to include the JavaScript file -->
+    <script src="plats.js"></script>
+</body>
+</html>

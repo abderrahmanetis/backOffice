@@ -1,0 +1,87 @@
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Conteneur principal */
+.container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Titre */
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* Table des plats */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table th {
+    background-color: #f4f4f4;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Boutons */
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:active {
+    background-color: #004085;
+}
+
+/* Formulaire d'ajout */
+form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="checkbox"] {
+    padding: 8px;
+    font-size: 16px;
+    width: calc(33% - 10px);
+}
+
+form button {
+    width: 100%;
+    background-color: #28a745;
+}
+
+form button:hover {
+    background-color: #218838;
+}

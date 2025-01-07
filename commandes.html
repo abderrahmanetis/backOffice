@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Commandes</title>
+    <link rel="stylesheet" href="style.css">
+   
+<body>
+    <div class="container">
+        <h2>Gestion des Commandes</h2>
+        <form id="form-commande">
+            <input type="number" id="commande-client" placeholder="Client ID" required>
+            <input type="text" id="commande-menus" placeholder="Menu IDs" required>
+            <input type="date" id="commande-date" required>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </form>
+        <table id="table-commandes" class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Client ID</th>
+                    <th>Menu IDs</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <script src="commandes.js"></script>
+</body>
+</html>

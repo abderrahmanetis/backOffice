@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "nom": "Spaghetti Bolognese",
+    "prix": 12.99,
+    "categorie": "Pâtes",
+    "disponibilite": true
+  },
+  {
+    "id": 2,
+    "nom": "Pizza Margherita",
+    "prix": 10.99,
+    "categorie": "Pizza",
+    "disponibilite": false
+  },
+  {
+    "id": 3,
+    "nom": "Pizza Margherita",
+    "prix": 10,
+    "categorie": "Pizza",
+    "disponibilite": true
+  },
+  {
+    "id": 4,
+    "nom": "Spaghetti Bolognese",
+    "prix": 2,
+    "categorie": "\tPâtes",
+    "disponibilite": true
+  },
+  {
+    "id": 5,
+    "nom": "Spaghetti Bolognese",
+    "prix": 2,
+    "categorie": "Pâtes",
+    "disponibilite": false
+  },
+  {
+    "id": 6,
+    "nom": "Spaghetti Bolognese",
+    "prix": 4,
+    "categorie": "Pizza",
+    "disponibilite": true
+  },
+  {
+    "id": 7,
+    "nom": "tacos",
+    "prix": 5,
+    "categorie": "sss",
+    "disponibilite": true
+  }
+]

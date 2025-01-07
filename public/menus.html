@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Menus</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Gestion des Menus</h2>
+        <form id="form-menu">
+            <input type="text" id="menu-nom" placeholder="Nom du menu" required>
+            <input type="number" id="menu-prix" placeholder="Prix" required>
+            <input type="text" id="menu-plats" placeholder="IDs des plats" required>
+            <button type="submit">Ajouter</button>
+        </form>
+        <table id="table-menus">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th>Plats</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <script src="menus.js"></script>
+</body>
+</html>
